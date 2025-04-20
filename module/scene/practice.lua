@@ -107,7 +107,7 @@ function scene.draw()
     GC.replaceTransform(SCR.xOy_ul)
     GC.setColor(clr.L)
     FONT.set(50)
-    GC.print("CONFIG", 15, 0)
+    GC.print("PRACTICE", 15, 0)
 
     -- Bottom bar & text
     GC.replaceTransform(SCR.xOy_d)
@@ -119,7 +119,7 @@ function scene.draw()
     GC.replaceTransform(SCR.xOy_dl)
     GC.setColor(clr.L)
     FONT.set(30)
-    GC.print("TWEAK YOUR SETTINGS FOR A BETTER CLICKING EXPERIENCE", 15, -45, 0, .85, 1)
+    GC.print("SOON I CAN GET NEW PERSONAL BEST…", 15, -45, 0, .85, 1)
 
     -- Fatigue text
     if fatigueSet and PracticeSettings.fatigue > 0 then
@@ -140,11 +140,13 @@ scene.widgetList = {
             GAME.start()
             GAME.practiceMode = true
             GAME.height = heightSet[PracticeSettings.height]
-            GAME.fatigue = PracticeSettings.fatigue + 1
-            if PracticeSettings.fatigue > 0 then
-                GAME.time = fatigueSet[GAME.fatigue - 1].time
+            if GAME.height > 0 then
+                GAME.floor = math.min( PracticeSettings.height - 1, 9)
+                GAME.upFloor()
             end
-            GAME.upFloor()
+            if PracticeSettings.fatigue > 0 then
+                GAME.time = fatigueSet[GAME.fatigue].time
+            end
             SCN.back("none")
         end,
     },
@@ -166,6 +168,14 @@ scene.widgetList = {
         disp = function() return PracticeSettings.fatigue end,
         code = function(value)   PracticeSettings.fatigue = value end,
         sound_drag = 'rotate',
+    },
+WIDGET.new {
+        name = 'back', type = 'button',
+        pos = { 0, 0 }, x = 60, y = 140, w = 160, h = 60,
+        color = { .15, .15, .15 },
+        sound_hover = 'menutap',
+        fontSize = 30, text = "    BACK", textColor = 'DL',
+        onClick = function() love.keypressed('escape') end,
     },
 }
 

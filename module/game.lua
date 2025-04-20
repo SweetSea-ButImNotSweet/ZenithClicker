@@ -1680,7 +1680,7 @@ function GAME.finish(reason)
         end
 
 
-        TEXTS.endHeight:set(("%.1fm"):format(GAME.height))
+        TEXTS.endHeight:set(("%s - %.1fm"):format(GAME.practiceMode and "PRAC" or "", GAME.height))
         if GAME.gigaspeedEntered then
             local s = ("F$1: $2"):repD(GAME.floor, Floors[GAME.floor].name)
             if GAME.gigaTime then s = s .. "   in " .. STRING.time_simp(GAME.gigaTime) end

@@ -178,6 +178,13 @@ local function keyPress(key)
         local W = scene.widgetList.about
         W._pressTime = W._pressTimeMax * 2
         W._hoverTime = W._hoverTimeMax
+    elseif key == 'capslock' then
+        if GAME.playing then
+            SFX.play('no')
+        else
+            SFX.play('menuhit1')
+            SCN.go('prac', 'none')
+        end
     end
 end
 
@@ -1112,14 +1119,14 @@ scene.widgetList = {
         end,
     },
     WIDGET.new {
-        name = 'achv', type = 'button',
-        pos = { 0, 0 }, x = 60, y = 320, w = 160, h = 60,
-        color = { COLOR.HEX '1F4E2C' },
-        sound_hover = 'menutap',
-        fontSize = 30, text = "    ACHV", textColor = { COLOR.HEX '73E284' },
+        name = 'prac', type = 'button',
+        pos = { 0, 0 }, x = 60, y = 410, w = 160, h = 60,
+        color = { .35, .12, .05 },
+        textColor = TextColor,
+        fontSize = 30, text = "    PRAC",
         onClick = function()
-            love.keypressed('tab')
-            love.keyreleased('tab')
+            love.keypressed('capslock')
+            love.keyreleased('capslock')
         end,
     },
     WIDGET.new {
